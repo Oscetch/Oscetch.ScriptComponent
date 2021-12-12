@@ -3,7 +3,7 @@ A small project for having compilation capability of c# code in a piece of softw
 
 ## Installation
 
-Clone the project `git clone https://github.com/Oscetch/ScriptComponent`
+Clone the project `git clone https://github.com/Oscetch/Oscetch.ScriptComponent.git`
 
 ## Build
 
