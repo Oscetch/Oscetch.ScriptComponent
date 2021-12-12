@@ -123,7 +123,8 @@ public class MyCompiler
 } 
 ``` 
 
-## Examples application
+## Example application
 
-If you need direction or are looking for a place to start, check out the project called `Oscetch.ScriptToolExample`.
+If you need direction or are looking for a place to start, check out the project called `Oscetch.ScriptToolExample`. 
 
+![](ReadMeContent/example.gif)
