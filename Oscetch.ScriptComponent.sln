@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31515.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oscetch.ScriptComponent.Compiler", "Oscetch.ScriptComponent.Compiler\Oscetch.ScriptComponent.Compiler.csproj", "{070F7DB7-572C-4CEB-AA8A-F6F02FBD0DD1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6569A980-A470-4BB4-AF80-2A85EA389172}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oscetch.ScriptComponent.Test", "Oscetch.ScriptComponent.Compiler.Test\Oscetch.ScriptComponent.Test.csproj", "{CFCFD950-782F-4B6E-8483-03DEF41BC89B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oscetch.ScriptComponent", "Oscetch.ScriptComponent\Oscetch.ScriptComponent.csproj", "{6DBF450E-9BBE-4873-BAC7-E466B44E662D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{99BC131E-2581-4E5B-8334-ABB6AB812EEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Osctech.ScriptToolExample", "Osctech.ScriptToolExample\Osctech.ScriptToolExample.csproj", "{4A9C698C-26CE-41CC-8A76-DAAE26DEBD00}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{070F7DB7-572C-4CEB-AA8A-F6F02FBD0DD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{070F7DB7-572C-4CEB-AA8A-F6F02FBD0DD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{070F7DB7-572C-4CEB-AA8A-F6F02FBD0DD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{070F7DB7-572C-4CEB-AA8A-F6F02FBD0DD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFCFD950-782F-4B6E-8483-03DEF41BC89B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFCFD950-782F-4B6E-8483-03DEF41BC89B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFCFD950-782F-4B6E-8483-03DEF41BC89B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFCFD950-782F-4B6E-8483-03DEF41BC89B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DBF450E-9BBE-4873-BAC7-E466B44E662D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DBF450E-9BBE-4873-BAC7-E466B44E662D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DBF450E-9BBE-4873-BAC7-E466B44E662D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DBF450E-9BBE-4873-BAC7-E466B44E662D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A9C698C-26CE-41CC-8A76-DAAE26DEBD00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A9C698C-26CE-41CC-8A76-DAAE26DEBD00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A9C698C-26CE-41CC-8A76-DAAE26DEBD00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A9C698C-26CE-41CC-8A76-DAAE26DEBD00}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CFCFD950-782F-4B6E-8483-03DEF41BC89B} = {6569A980-A470-4BB4-AF80-2A85EA389172}
+		{4A9C698C-26CE-41CC-8A76-DAAE26DEBD00} = {99BC131E-2581-4E5B-8334-ABB6AB812EEE}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0F23C964-5B3C-43AB-BA37-FFDBDE425DCF}
+	EndGlobalSection
+EndGlobal
