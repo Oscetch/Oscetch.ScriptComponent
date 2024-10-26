@@ -1,7 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
+    <Authors>OscarH</Authors>
+    <Description>A small project for having compilation capability of c# code in a piece of software</Description>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/Oscetch/Oscetch.ScriptComponent</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Oscetch/Oscetch.ScriptComponent</RepositoryUrl>
+    <PackageTags />
+    <Version>1.0.1</Version>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>

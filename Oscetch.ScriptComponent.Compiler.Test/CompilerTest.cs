@@ -1,13 +1,11 @@
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Oscetch.ScriptComponent.Compiler.Extensions;
 using Oscetch.ScriptComponent.Interfaces;
-using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
-namespace Oscetch.ScriptComponent.Compiler.Test
+namespace Oscetch.ScriptComponent.Test
 {
     [TestClass]
     public class CompilerTest
@@ -36,7 +34,7 @@ namespace SomeAssembly
             var execReferences = typeof(IScript).LoadAllReferences().ToMetadata();
             var syntaxTree = CSharpSyntaxTree.ParseText(TEST_CODE);
             var syntaxTree2 = CSharpSyntaxTree.ParseText(TEST_CODE2);
-            var result = OscetchCompiler.Compile("SomeAssembly", new[] { syntaxTree, syntaxTree2 }, execReferences, 
+            var result = OscetchCompiler.Compile("SomeAssembly", [syntaxTree, syntaxTree2], execReferences,
                 out var tempPath, out _);
 
             Assert.IsTrue(result);

@@ -1,5 +1,5 @@
 ﻿
-namespace Osctech.ScriptToolExample.Controls
+namespace Oscetch.ScriptToolExample.Controls
 {
     partial class ScriptControl
     {

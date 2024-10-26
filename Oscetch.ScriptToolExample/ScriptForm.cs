@@ -4,15 +4,15 @@ using Newtonsoft.Json;
 using Oscetch.ScriptComponent;
 using Oscetch.ScriptComponent.Compiler;
 using Oscetch.ScriptComponent.Compiler.Extensions;
-using Osctech.ScriptToolExample.Controls;
-using Osctech.ScriptToolExample.Dialogs;
+using Oscetch.ScriptToolExample.Controls;
+using Oscetch.ScriptToolExample.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Osctech.ScriptToolExample
+namespace Oscetch.ScriptToolExample
 {
     public partial class ScriptForm : Form
     {
@@ -133,35 +133,31 @@ namespace Osctech.ScriptToolExample
 
         private async void SyntaxHighlightingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using(var syntaxColorOptionDialog = new SyntaxColorOptionDialog(_settings.SyntaxDisplayOptions))
+            using var syntaxColorOptionDialog = new SyntaxColorOptionDialog(_settings.SyntaxDisplayOptions);
+            if (syntaxColorOptionDialog.ShowDialog() != DialogResult.OK)
             {
-                if (syntaxColorOptionDialog.ShowDialog() != DialogResult.OK) 
-                {
-                    return;
-                }
-
-                _settings.SyntaxDisplayOptions = syntaxColorOptionDialog.GetDisplayOptions();
-                await scriptControl1.SetReferences(_settings);
-                SaveSettings();
+                return;
             }
+
+            _settings.SyntaxDisplayOptions = syntaxColorOptionDialog.GetDisplayOptions();
+            await scriptControl1.SetReferences(_settings);
+            SaveSettings();
         }
 
         private void RegularToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using(var dirDialog = new FolderBrowserDialog { SelectedPath = _settings.BuildDirectory })
+            using var dirDialog = new FolderBrowserDialog { SelectedPath = _settings.BuildDirectory };
+            if (dirDialog.ShowDialog() != DialogResult.OK)
             {
-                if(dirDialog.ShowDialog() != DialogResult.OK)
-                {
-                    return;
-                }
-
-                _settings.BuildDirectory = dirDialog.SelectedPath;
-                SaveSettings();
-                BuildFolder(dirDialog.SelectedPath);
+                return;
             }
+
+            _settings.BuildDirectory = dirDialog.SelectedPath;
+            SaveSettings();
+            BuildFolder(dirDialog.SelectedPath);
         }
 
-        private List<SyntaxTree> RecursiveSyntaxTreeCheck(string path)
+        private static List<SyntaxTree> RecursiveSyntaxTreeCheck(string path)
         {
             var syntaxTrees = new List<SyntaxTree>();
             foreach (var filePath in Directory.GetFiles(path, "*.cs"))
@@ -207,17 +203,15 @@ namespace Osctech.ScriptToolExample
 
         private void RecursiveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (var dirDialog = new FolderBrowserDialog { SelectedPath = _settings.BuildDirectory })
+            using var dirDialog = new FolderBrowserDialog { SelectedPath = _settings.BuildDirectory };
+            if (dirDialog.ShowDialog() != DialogResult.OK)
             {
-                if (dirDialog.ShowDialog() != DialogResult.OK)
-                {
-                    return;
-                }
-
-                _settings.BuildDirectory = dirDialog.SelectedPath;
-                SaveSettings();
-                BuildFolder(dirDialog.SelectedPath);
+                return;
             }
+
+            _settings.BuildDirectory = dirDialog.SelectedPath;
+            SaveSettings();
+            BuildFolder(dirDialog.SelectedPath);
         }
 
         private void NewToolStripMenuItem_Click(object sender, EventArgs e)

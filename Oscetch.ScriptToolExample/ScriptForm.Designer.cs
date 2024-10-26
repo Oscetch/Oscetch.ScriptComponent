@@ -1,5 +1,5 @@
 ﻿
-namespace Osctech.ScriptToolExample
+namespace Oscetch.ScriptToolExample
 {
     partial class ScriptForm
     {
@@ -42,7 +42,7 @@ namespace Osctech.ScriptToolExample
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addReferenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.syntaxHighlightingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.scriptControl1 = new Osctech.ScriptToolExample.Controls.ScriptControl();
+            this.scriptControl1 = new Oscetch.ScriptToolExample.Controls.ScriptControl();
             this.setBuildOutputPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();

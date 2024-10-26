@@ -1,23 +1,19 @@
 ﻿using Microsoft.CodeAnalysis.Classification;
-using Microsoft.CodeAnalysis.CSharp;
-using Osctech.ScriptToolExample.Models;
+using Oscetch.ScriptToolExample.Models;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Osctech.ScriptToolExample.Settings
+namespace Oscetch.ScriptToolExample.Settings
 {
     public class Settings
     {
-        public List<string> References { get; set; } = new ();
+        public List<string> References { get; set; } = [];
         public string AssemblyName { get; set; } = "Default";
         public string BuildDirectory { get; set; } = Environment.CurrentDirectory;
         public string OutputPath { get; set; } = "Default.dll";
         public string CurrentSavePath { get; set; } = $"{Guid.NewGuid()}.cs";
-        public Dictionary<string, SyntaxDisplayOptions> SyntaxDisplayOptions { get; set; } = new ();
+        public Dictionary<string, SyntaxDisplayOptions> SyntaxDisplayOptions { get; set; } = [];
 
         public void SetDefaultSyntaxDisplayOptions()
         {

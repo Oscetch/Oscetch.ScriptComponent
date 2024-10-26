@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Osctech.ScriptToolExample.Wrappers
+namespace Oscetch.ScriptToolExample.Wrappers
 {
     public static class User32Wrapper
     {

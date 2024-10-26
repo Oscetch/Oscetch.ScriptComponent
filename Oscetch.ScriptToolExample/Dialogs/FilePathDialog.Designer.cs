@@ -1,5 +1,5 @@
 ﻿
-namespace Osctech.ScriptToolExample.Dialogs
+namespace Oscetch.ScriptToolExample.Dialogs
 {
     partial class FilePathDialog
     {

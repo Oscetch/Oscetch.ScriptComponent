@@ -1,12 +1,9 @@
 ﻿using Microsoft.CodeAnalysis.Classification;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Osctech.ScriptToolExample.Helpers
+namespace Oscetch.ScriptToolExample.Helpers
 {
     public static class SyntaxClassifierHelper
     {
@@ -14,15 +11,12 @@ namespace Osctech.ScriptToolExample.Helpers
 
         public static IReadOnlyList<string> GetClassifierTypeNames()
         {
-            if(_classifierTypeNames == null)
-            {
-                // super safe and reliable.. I promise
-                _classifierTypeNames = typeof(ClassificationTypeNames)
-                    .GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy)
-                    .Where(fi => fi.IsLiteral && !fi.IsInitOnly && fi.FieldType == typeof(string))
-                    .Select(x => (x.GetRawConstantValue()?.ToString()))
-                    .ToList();
-            }
+            // super safe and reliable.. I promise
+            _classifierTypeNames ??= typeof(ClassificationTypeNames)
+                .GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy)
+                .Where(fi => fi.IsLiteral && !fi.IsInitOnly && fi.FieldType == typeof(string))
+                .Select(x => (x.GetRawConstantValue()?.ToString()))
+                .ToList();
 
             return _classifierTypeNames;
         }

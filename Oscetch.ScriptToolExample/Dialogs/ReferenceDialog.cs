@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Osctech.ScriptToolExample.Dialogs
+namespace Oscetch.ScriptToolExample.Dialogs
 {
     public partial class ReferenceDialog : Form
     {

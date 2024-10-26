@@ -1,5 +1,5 @@
-﻿using Osctech.ScriptToolExample.Helpers;
-using Osctech.ScriptToolExample.Models;
+﻿using Oscetch.ScriptToolExample.Helpers;
+using Oscetch.ScriptToolExample.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Osctech.ScriptToolExample.Dialogs
+namespace Oscetch.ScriptToolExample.Dialogs
 {
     public partial class SyntaxColorOptionDialog : Form
     {

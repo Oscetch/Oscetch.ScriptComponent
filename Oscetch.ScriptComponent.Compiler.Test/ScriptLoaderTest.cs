@@ -35,7 +35,7 @@ namespace SomeAssembly
         {
             var execReferences = typeof(ITestScript).LoadAllReferences().ToMetadata();
             var syntaxTree = CSharpSyntaxTree.ParseText(TEST_CODE);
-            var compileResult = OscetchCompiler.Compile("TestAssembly", new[] { syntaxTree }, execReferences,
+            var compileResult = OscetchCompiler.Compile("TestAssembly", [syntaxTree], execReferences,
                 out var tempPath, out _);
 
             Assert.IsTrue(compileResult);

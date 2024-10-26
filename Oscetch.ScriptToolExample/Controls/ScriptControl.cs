@@ -1,30 +1,21 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Classification;
 using Microsoft.CodeAnalysis.Completion;
-using Microsoft.CodeAnalysis.Options;
 using Microsoft.CodeAnalysis.Text;
 using Oscetch.ScriptComponent;
-using Oscetch.ScriptComponent.Compiler.Extensions;
-using Osctech.ScriptToolExample.Settings;
-using Microsoft.CodeAnalysis.Formatting;
 using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
-using Osctech.ScriptToolExample.Wrappers;
-using Osctech.ScriptToolExample.Models;
+using Oscetch.ScriptToolExample.Wrappers;
+using Oscetch.ScriptToolExample.Models;
 using Oscetch.ScriptComponent.Compiler;
 
-namespace Osctech.ScriptToolExample.Controls
+namespace Oscetch.ScriptToolExample.Controls
 {
     public partial class ScriptControl : UserControl
     {
@@ -276,13 +267,13 @@ namespace Osctech.ScriptToolExample.Controls
             }
 
             var result = completionService.GetCompletionsAsync(_document, currentPos).Result;
-            if(result?.Items == null)
+            if(result?.ItemsList == null)
             {
                 return;
             }
 
-            var filterText = codeTextBox.Text.Substring(result.Span.Start, result.Span.End - result.Span.Start);
-            var items = completionService.FilterItems(_document, result.Items, filterText);
+            var filterText = codeTextBox.Text[result.Span.Start..result.Span.End];
+            var items = completionService.FilterItems(_document, [.. result.ItemsList], filterText);
             ShowSuggestions(currentPos, items);
         }
 
@@ -348,6 +339,7 @@ namespace Osctech.ScriptToolExample.Controls
 
         public async Task ReHighlight()
         {
+            if (codeTextBox.Text == "") return;
             User32Wrapper.BeginUpdate(Handle);
             var sourceText = SourceText.From(codeTextBox.Text);
             var classifiedSpans =
