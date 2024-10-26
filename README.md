@@ -3,7 +3,11 @@ A small project for having compilation capability of c# code in a piece of softw
 
 ## Installation
 
-Clone the project `git clone https://github.com/Oscetch/Oscetch.ScriptComponent.git`
+Clone the project  
+`git clone https://github.com/Oscetch/Oscetch.ScriptComponent.git`  
+Or use nuget packages:  
+`dotnet add package Oscetch.ScriptComponent --version 1.0.0`  
+`dotnet add package Oscetch.ScriptComponent.Compiler --version 1.0.0`
 
 ## Build
 
