@@ -1,31 +1,15 @@
 ﻿namespace Oscetch.ScriptComponent
 {
-    public class ScriptReference
+    public class ScriptReference(string dllPath, string scriptClassName)
     {
         /// <summary>
-        /// The path to the dll that contains the script class. Will be "dummy" if this reference is used to load a built in script(one that is already in a loaded assembly)
+        /// The path to the dll that contains the script class. This is ignored if this reference is used to load a built in script(one that is already in a loaded assembly)
         /// </summary>
-        public string DllPath { get; }
+        public string DllPath { get; } = dllPath;
         /// <summary>
         /// The complete class name of the class this instance references
         /// </summary>
-        public string ScriptClassName { get; }
-
-        public ScriptReference(string dllPath, string scriptClassName)
-        {
-            DllPath = dllPath;
-            ScriptClassName = scriptClassName;
-        }
-
-        /// <summary>
-        /// Script reference only used when loading scripts already in a loaded assembly
-        /// </summary>
-        /// <param name="scriptClassName"></param>
-        public ScriptReference(string scriptClassName)
-        {
-            DllPath = "dummy";
-            ScriptClassName = scriptClassName;
-        }
+        public string ScriptClassName { get; } = scriptClassName;
 
         public override string ToString()
         {

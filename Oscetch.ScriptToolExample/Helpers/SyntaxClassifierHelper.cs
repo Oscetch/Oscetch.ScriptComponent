@@ -12,11 +12,10 @@ namespace Oscetch.ScriptToolExample.Helpers
         public static IReadOnlyList<string> GetClassifierTypeNames()
         {
             // super safe and reliable.. I promise
-            _classifierTypeNames ??= typeof(ClassificationTypeNames)
+            _classifierTypeNames ??= [.. typeof(ClassificationTypeNames)
                 .GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy)
                 .Where(fi => fi.IsLiteral && !fi.IsInitOnly && fi.FieldType == typeof(string))
-                .Select(x => (x.GetRawConstantValue()?.ToString()))
-                .ToList();
+                .Select(x => (x.GetRawConstantValue()?.ToString()))];
 
             return _classifierTypeNames;
         }
