@@ -1,5 +1,6 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Oscetch.ScriptComponent.Compiler;
 using Oscetch.ScriptComponent.Compiler.Extensions;
 using Oscetch.ScriptComponent.Interfaces;
 using System.IO;

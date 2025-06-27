@@ -4,6 +4,7 @@ using Oscetch.ScriptComponent.Compiler.Extensions;
 using Oscetch.ScriptComponent.Interfaces;
 using System.Linq;
 using System.IO;
+using Oscetch.ScriptComponent.Compiler;
 
 namespace Oscetch.ScriptComponent.Test
 {
@@ -13,6 +14,11 @@ namespace Oscetch.ScriptComponent.Test
         public interface ITestScript : IScript
         {
             int Sum(int n1, int n2);
+        }
+
+        public class BuiltInScript : IScript
+        {
+            public int Test { get; } = 1;
         }
 
         private const string TEST_CODE = @"
@@ -54,6 +60,17 @@ namespace SomeAssembly
             var testResult = script.Sum(n1, n2);
 
             Assert.AreEqual(expected, testResult);
+        }
+
+        [TestMethod]
+        public void LoadBuiltInScript()
+        {
+            var type = typeof(BuiltInScript);
+            var reference = new ScriptReference("dummy", type.FullName);
+            var loadResult = ScriptLoader.TryLoadBuiltInScriptReference<BuiltInScript>(reference, out var script);
+
+            Assert.IsTrue(loadResult);
+            Assert.AreEqual(1, script.Test);
         }
     }
 }

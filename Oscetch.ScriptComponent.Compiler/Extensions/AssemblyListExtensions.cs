@@ -14,10 +14,9 @@ namespace Oscetch.ScriptComponent.Compiler.Extensions
         /// <returns></returns>
         public static List<PortableExecutableReference> ToMetadata(this IEnumerable<Assembly> assemblies)
         {
-            return assemblies
+            return [.. assemblies
                 .Where(x => x?.Location != null)
-                .Select(x => MetadataReference.CreateFromFile(x.Location))
-                .ToList();
+                .Select(x => MetadataReference.CreateFromFile(x.Location))];
         }
     }
 }

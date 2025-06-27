@@ -3,16 +3,14 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.Text;
 using Oscetch.ScriptComponent.Compiler.Extensions;
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Composition.Hosting;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace Oscetch.ScriptComponent
+namespace Oscetch.ScriptComponent.Compiler
 {
     /// <summary>
     /// A simple API for interacting with roslyn compilation
@@ -97,7 +95,7 @@ namespace Oscetch.ScriptComponent
             var syntaxTree = CSharpSyntaxTree.ParseText(code);
 
             var roslynCompilator = CSharpCompilation.Create(assemblyName, 
-                new[] { syntaxTree }, referensMetadata, compilationOptions);
+                [syntaxTree], referensMetadata, compilationOptions);
             var result = roslynCompilator.Emit(dllPath);
 
             tempDllPath = dllPath;

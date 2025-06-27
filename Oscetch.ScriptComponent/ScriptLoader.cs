@@ -10,7 +10,7 @@ namespace Oscetch.ScriptComponent
 {
     public static class ScriptLoader
     {
-        private static readonly Dictionary<string, Assembly> _loadedAssemblies = new();
+        private static readonly Dictionary<string, Assembly> _loadedAssemblies = [];
 
         private static bool TryLoadAssembly(string dllPath, out Assembly assembly)
         {
@@ -82,7 +82,7 @@ namespace Oscetch.ScriptComponent
             if (!_loadedAssemblies.TryGetValue(scriptReference.DllPath, out var assembly) || forceReload)
             {
                 assembly = AppDomain.CurrentDomain.GetAssemblies()
-                    .FirstOrDefault(x => Path.GetFileName(x.Location) == scriptReference.DllPath);
+                    .FirstOrDefault(x => x.GetType(scriptReference.ScriptClassName) != null);
                 if (assembly == null)
                 {
                     return false;

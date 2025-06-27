@@ -1,7 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Newtonsoft.Json;
-using Oscetch.ScriptComponent;
 using Oscetch.ScriptComponent.Compiler;
 using Oscetch.ScriptComponent.Compiler.Extensions;
 using Oscetch.ScriptToolExample.Controls;

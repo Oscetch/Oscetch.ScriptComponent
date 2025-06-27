@@ -2,7 +2,6 @@
 using Microsoft.CodeAnalysis.Classification;
 using Microsoft.CodeAnalysis.Completion;
 using Microsoft.CodeAnalysis.Text;
-using Oscetch.ScriptComponent;
 using System;
 using System.Collections.Immutable;
 using System.Data;
