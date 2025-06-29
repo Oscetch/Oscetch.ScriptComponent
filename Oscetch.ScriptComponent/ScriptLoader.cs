@@ -1,4 +1,5 @@
-﻿using Oscetch.ScriptComponent.Interfaces;
+﻿using Oscetch.ScriptComponent.Attributes;
+using Oscetch.ScriptComponent.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -31,13 +32,49 @@ namespace Oscetch.ScriptComponent
             return false;
         }
 
-        private static bool TryInstantiateScript<T>(Assembly assembly, string scriptClassName, out T script)
+        private static void SetParameters<T>(T instance, List<ScriptValueParameter> parameters)
+        {
+            var dict = parameters.ToDictionary(x => x.Name);
+            var fields = instance.GetType().GetFields();
+            foreach (var field in fields)
+            {
+                foreach (var attribute in field.GetCustomAttributes<ScriptParameter>())
+                {
+                    if (!dict.TryGetValue(attribute.Name, out var param))
+                    {
+                        Debug.WriteLine($"Unable to find {attribute.Name} value for field {field.Name}");
+                        continue;
+                    }
+
+                    var typedValue = Convert.ChangeType(param.Value, field.FieldType);
+                    field.SetValue(instance, typedValue);
+                }
+            }
+            var properties = instance.GetType().GetProperties();
+            foreach (var property in properties)
+            {
+                foreach (var attribute in property.GetCustomAttributes<ScriptParameter>())
+                {
+                    if (!dict.TryGetValue(attribute.Name, out var param))
+                    {
+                        Debug.WriteLine($"Unable to find {attribute.Name} value for property {property.Name}");
+                        continue;
+                    }
+
+                    var typedValue = Convert.ChangeType(param.Value, property.PropertyType);
+                    property.SetValue(instance, typedValue);
+                }
+            }
+        }
+
+        private static bool TryInstantiateScript<T>(Assembly assembly, string scriptClassName, List<ScriptValueParameter> parameters, out T script)
             where T : IScript
         {
             var scriptType = assembly.GetTypes().FirstOrDefault(x => x.FullName == scriptClassName);
             if (scriptType != null)
             {
                 script = (T)Activator.CreateInstance(scriptType);
+                SetParameters(script, parameters);
                 return true;
             }
 
@@ -59,10 +96,10 @@ namespace Oscetch.ScriptComponent
             script = default;
             return forceReload
                 ? TryLoadAssembly(scriptReference.DllPath, out var assembly)
-                    && TryInstantiateScript(assembly, scriptReference.ScriptClassName, out script)
+                    && TryInstantiateScript(assembly, scriptReference.ScriptClassName, scriptReference.Params, out script)
                 : (_loadedAssemblies.TryGetValue(scriptReference.DllPath, out assembly)
                     || TryLoadAssembly(scriptReference.DllPath, out assembly))
-                        && TryInstantiateScript(assembly, scriptReference.ScriptClassName, out script);
+                        && TryInstantiateScript(assembly, scriptReference.ScriptClassName, scriptReference.Params, out script);
         }
 
         /// <summary>
@@ -91,7 +128,7 @@ namespace Oscetch.ScriptComponent
                 _loadedAssemblies[scriptReference.DllPath] = assembly;
             }
 
-            return TryInstantiateScript(assembly, scriptReference.ScriptClassName, out script);
+            return TryInstantiateScript(assembly, scriptReference.ScriptClassName, scriptReference.Params, out script);
         }
     }
 }

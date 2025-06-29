@@ -5,6 +5,7 @@ using Oscetch.ScriptComponent.Interfaces;
 using System.Linq;
 using System.IO;
 using Oscetch.ScriptComponent.Compiler;
+using Oscetch.ScriptComponent.Attributes;
 
 namespace Oscetch.ScriptComponent.Test
 {
@@ -19,6 +20,18 @@ namespace Oscetch.ScriptComponent.Test
         public class BuiltInScript : IScript
         {
             public int Test { get; } = 1;
+        }
+
+        public class BuiltInScriptWithParam : IScript
+        {
+            [ScriptParameter(name: "A")]
+            public int A { get; set; }
+
+            [ScriptParameter("B")]
+            public bool B;
+
+            [ScriptParameter("C")]
+            public string C;
         }
 
         private const string TEST_CODE = @"
@@ -71,6 +84,20 @@ namespace SomeAssembly
 
             Assert.IsTrue(loadResult);
             Assert.AreEqual(1, script.Test);
+        }
+
+        [TestMethod]
+        public void LoadParams()
+        {
+            var type = typeof(BuiltInScriptWithParam);
+            var reference = new ScriptReference("", type.FullName, [new ScriptValueParameter("A", "4"), new ScriptValueParameter("B", "true"), new ScriptValueParameter("C", "test")]);
+            var loadResult = ScriptLoader.TryLoadBuiltInScriptReference<BuiltInScriptWithParam>(reference, out var script);
+
+            Assert.IsTrue(loadResult);
+
+            Assert.AreEqual(script.A, 4);
+            Assert.IsTrue(script.B);
+            Assert.AreEqual(script.C, "test");
         }
     }
 }

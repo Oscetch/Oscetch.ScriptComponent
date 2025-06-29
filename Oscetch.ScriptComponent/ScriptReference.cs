@@ -1,6 +1,9 @@
-﻿namespace Oscetch.ScriptComponent
+﻿using Oscetch.ScriptComponent.Attributes;
+using System.Collections.Generic;
+
+namespace Oscetch.ScriptComponent
 {
-    public class ScriptReference(string dllPath, string scriptClassName)
+    public class ScriptReference(string dllPath, string scriptClassName, List<ScriptValueParameter> parameters = null)
     {
         /// <summary>
         /// The path to the dll that contains the script class. This is ignored if this reference is used to load a built in script(one that is already in a loaded assembly)
@@ -10,6 +13,8 @@
         /// The complete class name of the class this instance references
         /// </summary>
         public string ScriptClassName { get; } = scriptClassName;
+
+        public List<ScriptValueParameter> Params { get; } = parameters ?? [];
 
         public override string ToString()
         {

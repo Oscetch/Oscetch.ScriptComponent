@@ -1,5 +1,6 @@
 # Oscetch.ScriptComponent
-A small project for having compilation capability of c# code in a piece of software 
+
+A small project for having compilation capability of c# code in a piece of software
 
 ## Installation
 
@@ -11,16 +12,17 @@ Or use nuget packages:
 
 ## Build
 
-Open the project in Visual Studio 2019+ and build. 
+Open the project in Visual Studio 2019+ and build.
 Then add the appropriate dlls to your project
 
 ## Usage
 
 ### Oscetch.ScriptComponent
 
-The project called `Oscetch.ScriptComponent` is a library which helps load built dlls dynamically. 
-Say you have a main project which should be able to handle user-generated code. 
+The project called `Oscetch.ScriptComponent` is a library which helps load built dlls dynamically.
+Say you have a main project which should be able to handle user-generated code.
 In this main project we have a interface that looks like this:
+
 ```csharp
 using Oscetch.ScriptComponent;
 
@@ -32,7 +34,9 @@ namespace test
     }
 }
 ```
+
 A user has written a mod using that interface that looks like this:
+
 ```csharp
 using test;
 
@@ -49,6 +53,7 @@ namespace SomeAssembly
 ```
 
 We can then load it in our main project like this at runtime
+
 ```csharp
 using Oscetch.ScriptComponent;
 
@@ -58,7 +63,7 @@ namespace test
     {
         public ITestScript GetScript(string userDllPath, string userClassFullName)
         {
-            var scriptReference = new ScriptReference(userDllPath, 
+            var scriptReference = new ScriptReference(userDllPath,
                             userClassFullName);
 
             if(ScriptLoader.TryLoadScriptReference<ITestScript>(scriptReference, out var script))
@@ -74,12 +79,61 @@ namespace test
 
 In this example we generate a `ScriptReference` inside the GetScript method, but a more sensible method is probably to get that reference when the dll is compiled and storing it in a database, json or xml file instead.
 
+Additionally, you can add parameters to the referenced script like so:
+
+```csharp
+using test;
+using Oscetch.ScriptComponent.Attributes;
+
+namespace SomeAssembly
+{
+    public class Test : ScriptLoaderTest.ITestScript
+    {
+        [ScriptParameter(name: "StaticOffset")]
+        public int StaticOffset { get; set; }
+
+        public int Sum(int n1, int n2)
+        {
+            return StaticOffset + n1 + n2;
+        }
+    }
+}
+```
+
+It will work on fields and properties. The type of the parameters must be inheriting the [IConvertible](https://learn.microsoft.com/en-us/dotnet/api/system.iconvertible?view=net-9.0) interface.
+
+Loading with parameters is done like so:
+
+```csharp
+using Oscetch.ScriptComponent;
+
+namespace test
+{
+    public class UserGeneratedCodeHandler
+    {
+        public ITestScript GetScript(string userDllPath, string userClassFullName)
+        {
+            var scriptReference = new ScriptReference(userDllPath,
+                            userClassFullName, [new ScriptValueParameter("StaticOffset", 10)]);
+
+            if(ScriptLoader.TryLoadScriptReference<ITestScript>(scriptReference, out var script))
+            {
+                throw new Exception("Unable to load script");
+            }
+
+            return script;
+        }
+    }
+}
+```
+
 ### Oscetch.ScriptComponent.Compiler
 
 Take the previous example, but this time imagine we're also compiling the user dll that contains the script we want to use.
 This (obviously) requires we have a textbox that the user can write code in or we can load a .txt/.cs file which the user selects.
 We also need to setup limitations on that input for which libraries the user may use before compiling, otherwise this gets much too complicated.
 So say we have that in place, we can have a method that compiles it like this:
+
 ```csharp
 using System;
 using System.Collections.Generic;
@@ -114,7 +168,7 @@ public class MyCompiler
 
         var syntaxTree = CSharpSyntaxTree.ParseText(code);
 
-        if(!OscetchCompiler.Compile("UserTestAssembly", new []{ syntaxTree }, references, 
+        if(!OscetchCompiler.Compile("UserTestAssembly", new []{ syntaxTree }, references,
                 out var tempDll, out var diagnostics))
         {
             throw new CompilationException(diagnostics);
@@ -124,11 +178,11 @@ public class MyCompiler
         File.Copy(tempDll, dllPath, true);
         return syntaxTree.GetScriptReferences(dllPath).ToList();
     }
-} 
-``` 
+}
+```
 
 ## Example application
 
-If you need direction or are looking for a place to start, check out the project called `Oscetch.ScriptToolExample`. 
+If you need direction or are looking for a place to start, check out the project called `Oscetch.ScriptToolExample`.
 
 ![](ReadMeContent/example.gif)
